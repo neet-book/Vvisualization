@@ -19,7 +19,28 @@ declare interface TotalDate {
   storeConfirm?: number | null;
 }
 
-interface AreaDate {
+/**
+ * 以天为单位数据
+ * @property date - 日期
+ * @property today - 今日的数据
+ * @property total - 总数据
+ * @property lastUpdateTime - 上次更新时间
+ */
+declare interface DayDate {
+  date: string,
+  today: TotalDate,
+  total: TotalDate,
+  lastUpdateTime: null | string
+}
+
+/**
+ * @property id - id
+ * @property lastUpdateTime - 上次更新时间
+ * @property children - 子区域数据
+ * @property total - 今日数据
+ * @property today - 总数据
+ */
+declare interface AreaDate {
   id: number,
   lastUpdateTime: string,
   children: AreaDate[],
