@@ -26,7 +26,7 @@ declare interface TotalDate {
  * @property total - 总数据
  * @property lastUpdateTime - 上次更新时间
  */
-declare interface DayDate {
+declare interface DayCount {
   date: string,
   today: TotalDate,
   total: TotalDate,

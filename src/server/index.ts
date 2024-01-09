@@ -4,6 +4,13 @@ const server = axios.create({
   baseURL: 'http://localhost:2024'
 })
 
+interface Result<T> {
+  reqId: number
+  code: number
+  msg: string
+  data: T
+}
+
 /**
  * 列表结果
  * @property chinaTotal - 国内总数据
@@ -12,16 +19,15 @@ const server = axios.create({
  * @property lastUpdateTime - 上次更新时间
  * @property overseaLastUpdateTime - 其他机构更新时间
  */
-interface ListResult {
+export interface CountData {
   chinaTotal: { today: TotalDate, total: TotalDate }
-  chinaDayList: {
-
-  }
+  chinaDayList: DayCount[]
   areaTree: AreaDate[]
   lastUpdateTime: string | null
   overseaLastUpdateTime: string | null
 }
 
-export function getList(): Promise<ListResult> {
-  return server.get('/api/list').then(resp => resp.data)
+
+export function getList() {
+  return server.get<Result<CountData>>('/api/list').then(resp => resp.data)
 }

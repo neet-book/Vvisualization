@@ -1,13 +1,13 @@
 import {defineStore} from "pinia";
-import {getList} from "../server";
+import {getList, type CountData} from "../server";
 
 export const useStore = defineStore('counter', {
-  state() {
-   return {}
-},
+  state(): { data?: CountData } {
+    return {}
+  },
   actions: {
     async getList() {
-      this.$state = await getList()
+      this.$state.data = await getList().then(resp => resp.data)
     }
   }
 })

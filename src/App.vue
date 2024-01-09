@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import {useStore} from "./store/inde.ts";
+
+const store = useStore()
+
+store.getList()
+
 </script>
 
 <template>
