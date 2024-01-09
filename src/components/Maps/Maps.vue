@@ -61,9 +61,16 @@ onMounted(async () => {
   <div class="map-container" ref="mapEl"></div>
 </template>
 
+<<<<<<< HEAD
 <style scoped lang="scss">
 .map-container {
   height: 100%;
   backdrop-filter: blur(10px);
 }
+=======
+<style scoped lang="scss" >
+ .map-container {
+   height: 100%;
+ }
+>>>>>>> d2a8f93 (chore : 添加地图绘制数据, 引入地图Demo)
 </style>
