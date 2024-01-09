@@ -5,9 +5,15 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@types/node':
+    specifier: ^20.10.7
+    version: 20.10.7
   axios:
     specifier: ^1.6.5
     version: 1.6.5
+  echarts:
+    specifier: ^5.4.3
+    version: 5.4.3
   pinia:
     specifier: ^2.1.7
     version: 2.1.7(typescript@5.3.3)(vue@3.4.5)
@@ -27,7 +33,7 @@ devDependencies:
     version: 5.3.3
   vite:
     specifier: ^5.0.8
-    version: 5.0.11(sass@1.69.7)
+    version: 5.0.11(@types/node@20.10.7)(sass@1.69.7)
   vue-tsc:
     specifier: ^1.8.25
     version: 1.8.27(typescript@5.3.3)
@@ -380,6 +386,11 @@ packages:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==, tarball: https://registry.npmmirror.com/@types/estree/-/estree-1.0.5.tgz}
     dev: true
 
+  /@types/node@20.10.7:
+    resolution: {integrity: sha512-fRbIKb8C/Y2lXxB5eVMj4IU7xpdox0Lh8bUPEdtLysaylsml1hOOx1+STloRs/B9nf7C6kPRmmg/V7aQW7usNg==, tarball: https://registry.npmmirror.com/@types/node/-/node-20.10.7.tgz}
+    dependencies:
+      undici-types: 5.26.5
+
   /@vitejs/plugin-vue@4.6.2(vite@5.0.11)(vue@3.4.5):
     resolution: {integrity: sha512-kqf7SGFoG+80aZG6Pf+gsZIVvGSCKE98JbiWqcCV9cThtg91Jav0yvYFC9Zb+jKetNGF6ZKeoaxgZfND21fWKw==, tarball: https://registry.npmmirror.com/@vitejs/plugin-vue/-/plugin-vue-4.6.2.tgz}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -387,7 +398,7 @@ packages:
       vite: ^4.0.0 || ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.10.7)(sass@1.69.7)
       vue: 3.4.5(typescript@5.3.3)
     dev: true
 
@@ -578,6 +589,13 @@ packages:
   /delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==, tarball: https://registry.npmmirror.com/delayed-stream/-/delayed-stream-1.0.0.tgz}
     engines: {node: '>=0.4.0'}
+    dev: false
+
+  /echarts@5.4.3:
+    resolution: {integrity: sha512-mYKxLxhzy6zyTi/FaEbJMOZU1ULGEQHaeIeuMR5L+JnJTpz+YR03mnnpBhbR4+UYJAgiXgpyTVLffPAjOTLkZA==, tarball: https://registry.npmmirror.com/echarts/-/echarts-5.4.3.tgz}
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.4.4
     dev: false
 
   /entities@4.5.0:
@@ -843,12 +861,19 @@ packages:
       is-number: 7.0.0
     dev: true
 
+  /tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==, tarball: https://registry.npmmirror.com/tslib/-/tslib-2.3.0.tgz}
+    dev: false
+
   /typescript@5.3.3:
     resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==, tarball: https://registry.npmmirror.com/typescript/-/typescript-5.3.3.tgz}
     engines: {node: '>=14.17'}
     hasBin: true
 
-  /vite@5.0.11(sass@1.69.7):
+  /undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==, tarball: https://registry.npmmirror.com/undici-types/-/undici-types-5.26.5.tgz}
+
+  /vite@5.0.11(@types/node@20.10.7)(sass@1.69.7):
     resolution: {integrity: sha512-XBMnDjZcNAw/G1gEiskiM1v6yzM4GE5aMGvhWTlHAYYhxb7S3/V1s3m2LDHa8Vh6yIWYYB0iJwsEaS523c4oYA==, tarball: https://registry.npmmirror.com/vite/-/vite-5.0.11.tgz}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -876,6 +901,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 20.10.7
       esbuild: 0.19.11
       postcss: 8.4.33
       rollup: 4.9.4
@@ -936,3 +962,9 @@ packages:
   /yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==, tarball: https://registry.npmmirror.com/yallist/-/yallist-4.0.0.tgz}
     dev: true
+
+  /zrender@5.4.4:
+    resolution: {integrity: sha512-0VxCNJ7AGOMCWeHVyTrGzUgrK4asT4ml9PEkeGirAkKNYXYzoPJCLvmyfdoOXcjTHPs10OZVMfD1Rwg16AZyYw==, tarball: https://registry.npmmirror.com/zrender/-/zrender-5.4.4.tgz}
+    dependencies:
+      tslib: 2.3.0
+    dev: false

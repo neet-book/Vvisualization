@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/node": "^20.10.7",
     "axios": "^1.6.5",
+    "echarts": "^5.4.3",
     "pinia": "^2.1.7",
     "vue": "^3.3.11"
   },
