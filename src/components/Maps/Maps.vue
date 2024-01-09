@@ -1,23 +1,44 @@
 <script setup lang="ts">
 import * as echarts from 'echarts'
-import {onMounted, ref, nextTick} from "vue";
+import {onMounted, ref} from "vue";
 import {useStore} from "../../store/inde.ts";
+import { geoCoordMap } from "@/assets/geoMap.ts"
 import "@/assets/map.js"
 
 const store = useStore()
 
 const mapEl = ref<HTMLElement | null>(null)
-onMounted(() => {
-  let data = [
+
+onMounted(async () => {
+  if (!store.list) {
+    await store.getList()
+  }
+
+  interface MapData {
+    name: string,
+    count: number
+    value: number[]
+  }
+
+  var data = ref<MapData[]>([
     {
       name: "内蒙古",
-      itemStyle: {
-        areaColor: "#56b1da",
-      },
-      value: [110.3467, 41.4899]
+      count: 1332,
+      value:[110.3467, 41.4899, 122]
     },
-  ];
-  const options = {
+  ])
+
+  /**
+   * 散点图现实的数据
+   * 设置给series-line.label. formatter配置项
+   * @param param - 单个散点的数据集
+   */
+  const setCount =  (param: { data: MapData }) => {
+    return param.data.count
+  }
+
+  const mapCharts = echarts.init(mapEl.value)
+  mapCharts.setOption( {
     geo: {    // 地理坐标系组件, 可以在地理坐标系上绘制其他图标
       map: "china",     // 使用 registerMap 注册的地图名称。
       aspectScale: 0.8,  // 地图宽长比
@@ -108,21 +129,23 @@ onMounted(() => {
             color: "#fff",
           },
         },
-        data: data,  // 图标绘制数据来源
+        data: data.value,  // 图标绘制数据来源
       },
       {
+        name: 'selectedPoint'
         type: 'scatter',   // 散点图
         coordinateSystem: 'geo',
-          symbol: 'pin',    // 散点形状为气泡
-        symbolSize: [30,30],
-        symbolOffset:['0%', '0%'] ,   //设置偏移量 ,使其居中
-        // label: {
-        //   show: false,
-        // },
+        symbol: 'pin',    // 散点形状为气泡
+        symbolSize: [30, 30],
+        symbolOffset: ['0%', '0%'],   //设置偏移量 ,使其居中
+        label: {
+          show: true,
+          formatter: setCount,
+        },
         itemStyle: {
           color: '#d93737', //标志颜色
         },
-        data: data,
+        data: data.value,
         showEffectOn: 'render',  // 现实出现特效
         rippleEffect: {  // 特效相关
           brushType: 'stroke'
@@ -130,12 +153,20 @@ onMounted(() => {
         zlevel: 1
       },
     ],
-  }
-  const mapCharts = echarts.init(mapEl.value)
-  mapCharts.setOption(options)
+  })
 
   mapCharts.on('click', (data) => {
-    console.log(data)
+    const { name } = data
+    mapCharts.setOption({
+      series: {
+        name: 'selectedPoint',
+        data: {
+          name,
+          // count: store?.list?.areaTree
+          value: geoCoordMap[name]
+        }
+      }
+    })
   })
 
 })
