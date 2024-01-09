@@ -40,7 +40,7 @@ store.getList()
   {
     flex-grow: 0;
     width: 30vw;
-    max-width: 350px;
+    max-width: 170px;
     height: 100%;
   }
   .app-main {
@@ -55,7 +55,6 @@ store.getList()
     .aside-right,
     .aside-left {
       min-width: 150px;
-      max-width: 200px;
       transition: all ease .1s;
     }
   }

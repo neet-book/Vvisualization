@@ -1,71 +1,70 @@
 <script setup lang="ts">
 import * as echarts from 'echarts'
-import { onMounted , ref, nextTick } from "vue";
+import {onMounted, ref, nextTick} from "vue";
 import {useStore} from "../../store/inde.ts";
 import "@/assets/map.js"
+
 const store = useStore()
 
 const mapEl = ref<HTMLElement | null>(null)
 onMounted(() => {
-  console.log(mapEl.value)
-  let data =[
+  let data = [
     {
       name: "内蒙古",
       itemStyle: {
         areaColor: "#56b1da",
       },
-      value:[110.3467, 41.4899]
+      value: [110.3467, 41.4899]
     },
   ];
   const options = {
-    geo: {    // 地里坐标系组件用于地图的绘制
+    geo: {    // 地理坐标系组件, 可以在地理坐标系上绘制其他图标
       map: "china",     // 使用 registerMap 注册的地图名称。
-      aspectScale: 0.8,
-      layoutCenter: ["50%", "50%"],
-      layoutSize: "120%",
+      aspectScale: 0.8,  // 地图宽长比
+      layoutCenter: ["50%", "50%"],  // 地图现实位置
+      layoutSize: "100%",  // 地图大小
+      // 地图区域样式
       itemStyle: {
-        normal: {
-          areaColor: {
-            type: "linear-gradient",
-            x: 0,
-            y: 1200,
-            x2: 1000,
-            y2: 0,
-            colorStops: [
-              {
-                offset: 0,
-                color: "#152E6E", // 0% 处的颜色
-              },
-              {
-                offset: 1,
-                color: "#0673AD", // 50% 处的颜色
-              },
-            ],
-            global: true, // 缺省为 false
-          },
-          shadowColor: "#0f5d9d",
-          shadowOffsetX: 0,
-          shadowOffsetY: 15,
-          opacity: 0.5,
+        areaColor: {
+          type: "linear-gradient",   // 类型 线性渐变
+          x: 0,
+          y: 1,
+          x2: 1,
+          y2: 0,
+          colorStops: [
+            {
+              offset: 0,
+              color: "#152E6E", // 0% 处的颜色
+            },
+            {
+              offset: 1,
+              color: "#ff7d7d", // 100% 处的颜色
+            },
+          ],
+          global: true, // 缺省为 false
         },
-        emphasis: {
-          areaColor: "#0f5d9d",
-        },
-      },
+        // shadowColor: "rgba(168,214,255,0)",  // 阴影颜色
+        shadowOffsetX: 0,
+        shadowOffsetY: 10,
+        opacity: 0.3,
+        // 高亮状态下的多边形和标签样式。
 
+      },
+      emphasis: {
+        areaColor: "#0f5d9d",
+      },
+      // 特定区域样式配置
       regions: [
         {
           name: "南海诸岛",
           itemStyle: {
             areaColor: "rgba(0, 10, 52, 1)",
             borderColor: "rgba(0, 10, 52, 1)",
-            normal: {
-              opacity: 0,
-              label: {
-                show: false,
-                color: "#009cc9",
-              },
-            },
+            opacity: 0,
+            // label: {  // 标签样式
+            //   show: false,
+            //   color: "#009cc9",
+            // },
           },
           label: {
             show: false,
@@ -75,14 +74,14 @@ onMounted(() => {
         },
       ],
     },
-    series: [
+    series: [  // 可视化图标
       {
-        type: "map",
+        type: "map",  // 地图图表
         selectedMode: "multiple",
-        mapType: "china",
-        aspectScale: 0.8,
+        map: "china",
+        aspectScale: 0.8,  // 地图长宽比
         layoutCenter: ["50%", "50%"], //地图位置
-        layoutSize: "120%",
+        layoutSize: "100%",  // 地图大小
         zoom: 1, //当前视角的缩放比例
         // roam: true, //是否开启平游或缩放
         scaleLimit: {
@@ -90,57 +89,53 @@ onMounted(() => {
           min: 1,
           max: 2,
         },
+        // 配置地图区域label
         label: {
-          show: false,
-          color: "#96ff54",
-          fontSize: 116,
+          show: true,  // 是否显示
+          color: "#afafaf",
+          fontSize: 10,
         },
-        itemStyle: {
-          normal: {
-            areaColor: "#0c3653",
-            borderColor: "#1cccff",
-            borderWidth: 1.8,
-          },
-          emphasis: {
-            areaColor: "#56b1da",
-            label: {
-              show: false,
-              color: "#fff",
-            },
+        itemStyle: {  // 地图区域样式
+          // 普通模式样式
+          areaColor: "rgba(120,179,224,0.49)",
+          borderColor: "#1cccff",
+          borderWidth: 1,
+        },
+        emphasis: {   // 强调模式样式
+          areaColor: "rgba(246,111,111,0.78)",
+          label: {
+            show: true,
+            color: "#fff",
           },
         },
-        data: data,
+        data: data,  // 图标绘制数据来源
       },
       {
-        name: 'Top 5',
-        type: 'scatter',
+        type: 'scatter',   // 散点图
         coordinateSystem: 'geo',
-        //   symbol: 'image://http://ssq168.shupf.cn/data/biaoji.png',
-        // symbolSize: [30,120],
-        // symbolOffset:[0, '-40%'] ,
-        label: {
-          normal: {
-            show: false,
-          }
-        },
+          symbol: 'pin',    // 散点形状为气泡
+        symbolSize: [30,30],
+        symbolOffset:['0%', '0%'] ,   //设置偏移量 ,使其居中
+        // label: {
+        //   show: false,
+        // },
         itemStyle: {
-          normal: {
-            color: '#D8BC37', //标志颜色
-          }
+          color: '#d93737', //标志颜色
         },
         data: data,
-        showEffectOn: 'render',
-        rippleEffect: {
+        showEffectOn: 'render',  // 现实出现特效
+        rippleEffect: {  // 特效相关
           brushType: 'stroke'
         },
-        hoverAnimation: true,
         zlevel: 1
       },
     ],
   }
-  nextTick(() => {
-    const mapCharts = echarts.init(mapEl.value)
-    mapCharts.setOption(options)
+  const mapCharts = echarts.init(mapEl.value)
+  mapCharts.setOption(options)
+
+  mapCharts.on('click', (data) => {
+    console.log(data)
   })
 
 })
@@ -151,8 +146,9 @@ onMounted(() => {
   <div class="map-container" ref="mapEl"></div>
 </template>
 
-<style scoped lang="scss" >
- .map-container {
-   height: 100%;
- }
+<style scoped lang="scss">
+.map-container {
+  height: 100%;
+  backdrop-filter: blur(10px);
+}
 </style>
