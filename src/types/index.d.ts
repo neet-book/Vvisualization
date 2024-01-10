@@ -34,6 +34,7 @@ declare interface DayCount {
 }
 
 /**
+ * 地区疫情数据
  * @property id - id
  * @property lastUpdateTime - 上次更新时间
  * @property children - 子区域数据

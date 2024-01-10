@@ -7,6 +7,11 @@ export const useStore = defineStore('counter', {
       list: <CountData>{}
     }
   },
+  getters: {
+    cityAreaData: (state) => {
+      return state.list.chinaAreaData.children
+    }
+  },
   actions: {
     async getList() {
       this.$state.list = await getList().then(resp => resp.data)

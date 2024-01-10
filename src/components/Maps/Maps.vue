@@ -23,7 +23,7 @@ const createScatterDate = (): MapData[]  => {
   const list: MapData[] = []
 
   if (store.list) {
-    const areaList = store.list.chinaAreaData.children
+    const areaList = store.cityAreaData
     for (const area of areaList) {
       list.push({
         name: area.name,

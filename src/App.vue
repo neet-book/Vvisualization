@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {useStore} from "./store/inde.ts";
 import Maps from "@/components/Maps/Maps.vue";
+import CityTable from '@/components/CityTable/CityTable.vue'
 
 const store = useStore()
 
@@ -12,7 +13,9 @@ store.getList()
   <div class="container">
     <aside class="aside-left"></aside>
     <main class="app-main"><Maps></Maps></main>
-    <aside class="aside-right"></aside>
+    <aside class="aside-right">
+      <CityTable></CityTable>
+    </aside>
   </div>
 </template>
 
