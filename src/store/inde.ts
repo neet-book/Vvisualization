@@ -4,17 +4,21 @@ import {getList} from "../server";
 export const useStore = defineStore('counter', {
   state: () => {
     return {
-      list: <CountData>{}
+      list: <CountData>{},
+      area: ''
     }
   },
   getters: {
-    cityAreaData: (state) => {
+    areaCityData: (state) => {
       return state.list.chinaAreaData.children
     }
   },
   actions: {
     async getList() {
       this.$state.list = await getList().then(resp => resp.data)
+    },
+    setCurrentArea(area: string) {
+      this.$state.area = area
     }
   }
 })

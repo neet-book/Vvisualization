@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {useStore} from "./store/inde.ts";
 import Maps from "@/components/Maps/Maps.vue";
-import CityTable from '@/components/CityTable/CityTable.vue'
+import CityTable from '@/components/AreaCityTable/AreaCityTable.vue'
 
 const store = useStore()
 
@@ -43,7 +43,7 @@ store.getList()
   {
     flex-grow: 0;
     width: 30vw;
-    max-width: 170px;
+    max-width: 330px;
     height: 100%;
   }
   .app-main {
