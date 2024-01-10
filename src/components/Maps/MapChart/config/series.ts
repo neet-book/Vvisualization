@@ -39,14 +39,7 @@ const chinaMap = {
 }
 
 
-/**
- * 散点图显示的数据, 返回数据中字段字段的值
- * 设置给series-line.label. formatter配置项
- * @param param - 单个散点的数据集
- */
-const setCount = (param: { data: MapData }) => {
-  return param.data.count
-}
+
 
 /**
  * 散点图配置
@@ -61,7 +54,6 @@ const scatter = {
   symbolOffset: ['0%', '0%'],   //设置偏移量 ,使其居中
   label: {
     show: true,
-    formatter: setCount,
   },
   itemStyle: {
     color: '#d93737', //标志颜色
@@ -74,6 +66,6 @@ const scatter = {
 }
 
 export default [
-    map,
+    chinaMap,
     scatter
 ]
