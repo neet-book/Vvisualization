@@ -42,6 +42,7 @@ declare interface DayCount {
  */
 declare interface AreaDate {
   id: number,
+  name: string
   lastUpdateTime: string,
   children: AreaDate[],
   total: TotalDate,

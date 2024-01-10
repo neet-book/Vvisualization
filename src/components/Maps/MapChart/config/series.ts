@@ -5,7 +5,8 @@
  */
 const chinaMap = {
   type: "map",  // 地图图表
-  selectedMode: "multiple",
+  // 选择模式
+  // selectedMode: "multiple",
   map: "china",
   aspectScale: 0.8,  // 地图长宽比
   layoutCenter: ["50%", "50%"], //地图位置
@@ -51,12 +52,13 @@ const scatter = {
   coordinateSystem: 'geo',
   symbol: 'pin',    // 散点形状为气泡
   symbolSize: [30, 30],
-  symbolOffset: ['0%', '0%'],   //设置偏移量 ,使其居中
-  label: {
+  symbolOffset: ['0%', '-10%'],   //设置偏移量 ,[x, y]
+  label: {  // 数据样式
     show: true,
+    color: '#075d5d'
   },
   itemStyle: {
-    color: '#d93737', //标志颜色
+    color: 'rgba(58,194,255,0.71)', //标志颜色
   },
   showEffectOn: 'render',  // 现实出现特效
   rippleEffect: {  // 特效相关
