@@ -2,9 +2,9 @@ import {defineStore} from "pinia";
 import {getList} from "../server";
 
 export const useStore = defineStore('counter', {
-  state: (): { list: CountData | null } => {
+  state: () => {
     return {
-      list: null
+      list: <CountData>{}
     }
   },
   actions: {

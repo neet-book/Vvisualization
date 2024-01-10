@@ -31,12 +31,19 @@ const chinaMap = {
     borderWidth: 1,
   },
   emphasis: {   // 强调模式样式
-    areaColor: "rgba(246,111,111,0.78)",
+    itemStyle: {
+      areaColor: "rgba(50,136,224,0.78)",
+    },
     label: {
       show: true,
       color: "#fff",
     },
   },
+  select: {
+    itemStyle: {
+      areaColor: "rgba(50,136,224,0.78)",
+    },
+  }
 }
 
 

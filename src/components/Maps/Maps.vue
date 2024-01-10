@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onBeforeMount, onMounted, ref} from "vue";
+import { onUnmounted, onMounted, ref} from "vue";
 import {useStore} from "@/store/inde.ts";
 import {geoCoordMap} from "@/assets/geoMap.ts"
 import {MapChart} from "./MapChart";
@@ -10,7 +10,15 @@ interface MapData {
 }
 const store = useStore()
 const mapEl = ref<HTMLElement | null>(null)
+let observe: ResizeObserver
+const emit = defineEmits<{
+  click: [string]
+}>()
 
+/**
+ * 创建散点图数据
+ * @return 包含该区域当日重确诊数据
+ */
 const createScatterDate = (): MapData[]  => {
   const list: MapData[] = []
 
@@ -37,6 +45,9 @@ const setCount = (param: { data: MapData }) => {
   return param.data.count
 }
 
+/**
+ * 初始化地图
+ */
 const initMapChart = async () => {
   if (!store.list) await store.getList()
 
@@ -45,20 +56,27 @@ const initMapChart = async () => {
     mapChart.init()
     mapChart.setScatterFormat(setCount)
     mapChart.setScatterDate(createScatterDate())
-    console.log(createScatterDate())
+
+    observe = new ResizeObserver(() => {
+      mapChart.chart?.resize()
+    })
+    observe.observe(mapEl.value)
+
     // 注册地图点击事件
     mapChart.onClick(area => {
-
+      emit('click', area)
     })
   }
 }
 
 
-onBeforeMount(() => {
-  if (!store.list) store.getList()
+onMounted(() => {
+  initMapChart()
 })
 
-onMounted(initMapChart)
+onUnmounted(() => {
+  observe?.disconnect()
+})
 
 </script>
 
